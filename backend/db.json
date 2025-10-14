@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "username": "admin",
+      "email": "admin@local",
+      "passwordHash": "$2b$10$hfg5a3mRhqkbybVKnC9iLuPYgKn0h2KqAIWcicNTzKnpnE8dVLo8G",
+      "role": "admin",
+      "createdAt": 1728900000000
+    },
+    {
+      "id": "3e9f82db-c746-4844-aa74-e24ec2826dda",
+      "username": "gabriel",
+      "email": "gabriel@gmail.com",
+      "passwordHash": "$2b$10$4756B1jj/mT38Syx1AnDG.P0cHItgJKb.4/W/AvRC.jG0S2DFK3Z2",
+      "role": "admin",
+      "createdAt": 1760457646998
+    },
+    {
+      "id": "39071ceb-9cde-482f-877b-40790183d33a",
+      "username": "gabriel pallares",
+      "email": "keyner@gmail.com",
+      "role": "admin",
+      "createdAt": 1760462199106,
+      "passwordHash": "$2b$10$PDM66BQNZRF1j.LBkMDKM.4T43x90fYwCytuLcHUgK681aZ0BfpbG"
+    }
+  ],
+  "products": []
+}
