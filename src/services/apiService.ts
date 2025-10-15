@@ -62,4 +62,29 @@ export const api = {
     if (!res.ok) throw new Error((await res.json()).message);
     return res.json();
   },
+
+  // debajo de deleteProduct
+  async createOrder(order: { items: { productId: string; quantity: number }[] }, token: string) {
+    const res = await fetch(`${API_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(order),
+    });
+    if (!res.ok) throw new Error((await res.json()).message || "Error al crear orden");
+    return res.json();
+  },
+
+  async myOrders(token: string) {
+    const res = await fetch(`${API_URL}/orders/my`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Error al obtener mis órdenes");
+    return res.json();
+  },
+
+
 };
+

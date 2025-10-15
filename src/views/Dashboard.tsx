@@ -14,8 +14,17 @@ const Dashboard: React.FC = () => {
   };
 
   return (
+
     <div className="max-w-xl mx-auto p-6 space-y-4">
       <h1 className="text-2xl font-bold">Hola, {user.username}</h1>
+      {/* Link al catálogo */}
+      <a
+        href="/catalog"
+        className="inline-block bg-emerald-600 text-white px-3 py-2 rounded"
+      >
+        Ver catálogo y comprar
+      </a>
+
       <p className="text-sm">Rol: {user.role}</p>
 
       {user.role === "admin" && (

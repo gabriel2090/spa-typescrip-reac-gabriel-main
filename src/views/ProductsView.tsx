@@ -110,23 +110,75 @@ const ProductsView: React.FC = () => {
 
       {isAdmin && (
         <form onSubmit={submit} className="grid grid-cols-2 gap-3 border p-4 rounded">
-          <input className="border p-2 rounded" placeholder="SKU" value={form.sku}
-            onChange={(e) => setForm((s) => ({ ...s, sku: e.target.value }))} required />
-          <input className="border p-2 rounded" placeholder="Nombre" value={form.name}
-            onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))} required />
-          <input className="border p-2 rounded" placeholder="Marca" value={form.brand}
-            onChange={(e) => setForm((s) => ({ ...s, brand: e.target.value }))} />
-          <input className="border p-2 rounded" placeholder="Categoría" value={form.category}
-            onChange={(e) => setForm((s) => ({ ...s, category: e.target.value }))} />
-          <input className="border p-2 rounded" type="number" min={0} placeholder="Cantidad" value={form.quantity}
-            onChange={(e) => setForm((s) => ({ ...s, quantity: Number(e.target.value) }))} />
-          <input className="border p-2 rounded" type="number" min={0} step="0.01" placeholder="Precio" value={form.price}
-            onChange={(e) => setForm((s) => ({ ...s, price: Number(e.target.value) }))} />
-          <input className="border p-2 rounded col-span-2" placeholder="Imagen URL" value={form.imageUrl}
-            onChange={(e) => setForm((s) => ({ ...s, imageUrl: e.target.value }))} />
+          <input
+            className="border p-2 rounded"
+            placeholder="SKU"
+            value={form.sku}
+            onChange={(e) => setForm((s) => ({ ...s, sku: e.target.value }))}
+            required
+          />
+          <input
+            className="border p-2 rounded"
+            placeholder="Nombre"
+            value={form.name}
+            onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
+            required
+          />
+          <input
+            className="border p-2 rounded"
+            placeholder="Marca"
+            value={form.brand}
+            onChange={(e) => setForm((s) => ({ ...s, brand: e.target.value }))}
+          />
+          <input
+            className="border p-2 rounded"
+            placeholder="Categoría"
+            value={form.category}
+            onChange={(e) => setForm((s) => ({ ...s, category: e.target.value }))}
+          />
+          <input
+            className="border p-2 rounded"
+            type="number"
+            min={0}
+            placeholder="Cantidad"
+            value={form.quantity}
+            onChange={(e) => setForm((s) => ({ ...s, quantity: Number(e.target.value) }))}
+          />
+          <input
+            className="border p-2 rounded"
+            type="number"
+            min={0}
+            step="0.01"
+            placeholder="Precio"
+            value={form.price}
+            onChange={(e) => setForm((s) => ({ ...s, price: Number(e.target.value) }))}
+          />
+          <input
+            className="border p-2 rounded col-span-2"
+            placeholder="Imagen URL"
+            value={form.imageUrl}
+            onChange={(e) => setForm((s) => ({ ...s, imageUrl: e.target.value }))}
+          />
+
+          {/* Vista previa de imagen */}
+          {form.imageUrl && (
+            <div className="col-span-2">
+              <p className="text-xs text-gray-500 mb-1">Vista previa</p>
+              <img
+                src={form.imageUrl}
+                alt="preview"
+                className="w-32 h-32 object-cover rounded border"
+                onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
+              />
+            </div>
+          )}
+
           <label className="flex items-center gap-2 col-span-2">
-            <input type="checkbox" checked={!!form.isActive}
-              onChange={(e) => setForm((s) => ({ ...s, isActive: e.target.checked }))} />
+            <input
+              type="checkbox"
+              checked={!!form.isActive}
+              onChange={(e) => setForm((s) => ({ ...s, isActive: e.target.checked }))}
+            />
             Activo
           </label>
 
@@ -135,8 +187,14 @@ const ProductsView: React.FC = () => {
               {editingId ? "Guardar cambios" : "Crear producto"}
             </button>
             {editingId && (
-              <button type="button" onClick={() => { setEditingId(null); setForm({ ...empty }); }}
-                className="px-4 py-2 bg-gray-200 rounded">
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingId(null);
+                  setForm({ ...empty });
+                }}
+                className="px-4 py-2 bg-gray-200 rounded"
+              >
                 Cancelar
               </button>
             )}
@@ -147,6 +205,8 @@ const ProductsView: React.FC = () => {
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-100">
+            {/* Nueva columna de imagen */}
+            <th className="p-2 border">Imagen</th>
             <th className="p-2 border">SKU</th>
             <th className="p-2 border">Nombre</th>
             <th className="p-2 border">Precio</th>
@@ -158,18 +218,38 @@ const ProductsView: React.FC = () => {
         <tbody>
           {products.map((p) => (
             <tr key={p.id}>
+              <td className="p-2 border">
+                {p.imageUrl ? (
+                  <img
+                    src={p.imageUrl}
+                    alt={p.name}
+                    className="w-14 h-14 object-cover rounded"
+                    onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
+                  />
+                ) : (
+                  <span className="text-xs text-gray-400">Sin imagen</span>
+                )}
+              </td>
               <td className="p-2 border">{p.sku}</td>
               <td className="p-2 border">{p.name}</td>
-              <td className="p-2 border">{p.price}</td>
+              <td className="p-2 border">
+                {typeof p.price === "number" ? p.price.toFixed(2) : p.price}
+              </td>
               <td className="p-2 border">{p.quantity}</td>
               <td className="p-2 border">{p.isActive ? "Activo" : "Inactivo"}</td>
               <td className="p-2 border">
                 {isAdmin ? (
                   <div className="flex gap-2">
-                    <button onClick={() => edit(p)} className="px-2 py-1 bg-amber-500 text-white text-sm rounded">
+                    <button
+                      onClick={() => edit(p)}
+                      className="px-2 py-1 bg-amber-500 text-white text-sm rounded"
+                    >
                       Editar
                     </button>
-                    <button onClick={() => remove(p.id!)} className="px-2 py-1 bg-red-500 text-white text-sm rounded">
+                    <button
+                      onClick={() => remove(p.id!)}
+                      className="px-2 py-1 bg-red-500 text-white text-sm rounded"
+                    >
                       Eliminar
                     </button>
                   </div>

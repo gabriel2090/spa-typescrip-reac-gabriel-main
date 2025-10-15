@@ -23,7 +23,54 @@
       "role": "admin",
       "createdAt": 1760462199106,
       "passwordHash": "$2b$10$PDM66BQNZRF1j.LBkMDKM.4T43x90fYwCytuLcHUgK681aZ0BfpbG"
+    },
+    {
+      "id": "b1b447da-85b6-421f-9894-2e78274e3611",
+      "username": "keynerr",
+      "email": "keynerr@gmail.com",
+      "role": "admin",
+      "createdAt": 1760532328255,
+      "passwordHash": "$2b$10$2YARvLMaKKvJPIFBMLjr3uhMuvrlW4Ye7FrExDFI1gIHvVfjBhd3S"
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": "8fd8f03a-8fc5-4fa1-a1ca-d420bb8ba475",
+      "sku": "gtgt",
+      "name": "ththt",
+      "brand": "gtgtg",
+      "category": "ththt",
+      "quantity": 57,
+      "price": 0.05,
+      "isActive": true,
+      "imageUrl": "tyththt",
+      "createdAt": 1760464504255
+    }
+  ],
+  "orders": [
+    {
+      "id": "947bef75-cc5f-4840-9bc7-de293fd082ed",
+      "userId": "b1b447da-85b6-421f-9894-2e78274e3611",
+      "items": [
+        {
+          "productId": "8fd8f03a-8fc5-4fa1-a1ca-d420bb8ba475",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1760532340496,
+      "status": "paid"
+    },
+    {
+      "id": "26149353-565a-4f6b-ae9c-32947f1f6768",
+      "userId": "b1b447da-85b6-421f-9894-2e78274e3611",
+      "items": [
+        {
+          "productId": "8fd8f03a-8fc5-4fa1-a1ca-d420bb8ba475",
+          "quantity": 1
+        }
+      ],
+      "createdAt": 1760532345430,
+      "status": "paid"
+    }
+  ]
 }
